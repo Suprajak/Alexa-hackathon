@@ -37,7 +37,7 @@ public class HelloWorldIntentHandler implements RequestHandler {
     	 words.add("Day1");
     	 words.add("Customer");
     	 words.add("Trust");
-    	 
+    	 //made a test change
     	 //Pick random numbers
     	 Random random = new Random();
     	 String mappedWords = new String();
