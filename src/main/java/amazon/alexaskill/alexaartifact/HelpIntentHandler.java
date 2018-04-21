@@ -15,10 +15,12 @@ public class HelpIntentHandler implements RequestHandler {
     }
 
     public Optional<Response> handle(HandlerInput input) {
-        String speechText = "You can say hello to me!";
+        String speechText = "You will be given with a mapping of number to word. For example 1  maps to Awesome and 2 maps to Alexa. Then there will be a combination give to you " +
+                "like 2,1. So you have to correctly say in order like 'answer is Alexa Awesome'. There will be different combination of words. For each level" +
+                "there will be an increase in complexity with number of words and the combination." ;
         return input.getResponseBuilder()
                 .withSpeech(speechText)
-                .withSimpleCard("HelloWorld", speechText)
+                .withSimpleCard("Listen to Alexa's instructions. ", speechText)
                 .withReprompt(speechText)
                 .build();
     }
