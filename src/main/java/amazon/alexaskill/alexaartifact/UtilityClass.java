@@ -29,14 +29,11 @@ public class UtilityClass {
         words.add("Customer");
         words.add("Trust");
         words.add("Awesome");
-        words.add("Water");
         words.add("World");
         words.add("Land");
-        words.add("Cookies");
         words.add("Android");
         words.add("Notes");
         words.add("Pizza");
-        words.add("Series");
         words.add("Bag");
         words.add("Wallet");
         words.add("Cricket");
@@ -46,6 +43,15 @@ public class UtilityClass {
         words.add("Keyboard");
         words.add("Building");
         words.add("Box");
+        words.add("Calender");
+        words.add("Fire");
+        words.add("Exit");
+        words.add("Bottle");
+        words.add("Chennai");
+        words.add("Sample");
+        words.add("Pen");
+        words.add("Laptop");
+        words.add("Sky");
 
         //Pick random numbers
         Random random = new Random();
@@ -88,13 +94,13 @@ public class UtilityClass {
         Map<Integer, String> encodedWords = (Map<Integer, String>) sessionAttributes.get(Attributes.GAME_MAPPED_WORDS);
         IntentRequest intentRequest = (IntentRequest)input.getRequestEnvelope().getRequest();
         Map<String,Slot> slots = intentRequest.getIntent().getSlots();
-        String[] userInput  = slots.get(Attributes.INPUT_INTENT).getValue().split(" ");
+        String[] userInput = slots.get(Attributes.INPUT_INTENT).getValue().split(" ");
         boolean isSuccess = true;
         int i = 0;
         Long startTime = (Long) sessionAttributes.get(Attributes.GAME_START_TIME);
         Long stopTime = System.currentTimeMillis();
         Long timeTaken = stopTime - startTime;
-        if(timeTaken < (15000*encodedWords.size())) {
+        if(timeTaken < 35000) {
             for (Map.Entry<Integer, String> map : encodedWords.entrySet()) {
                 if (i < userInput.length && !map.getValue().equalsIgnoreCase(userInput[i])) {
                     isSuccess = false;
@@ -105,7 +111,7 @@ public class UtilityClass {
                 int score = (Integer) sessionAttributes.get(Attributes.GAME_SCORE_KEY);
                 score += (Integer) sessionAttributes.get(Attributes.GAME_LEVEL_KEY);
                 sessionAttributes.put(Attributes.GAME_SCORE_KEY, score);
-                responseToUser = "Awesome!!! You cracked it!! Your score is:   " + score +"     Here's your next combination!. " ;
+                responseToUser = "Awesome!!! You cracked it!! Your score is:   " + score +",   Here's your next combination!. " ;
             } else {
                 responseToUser = "Sorry! That's not right! KeepTrying.   Here's your next combination!.  ";
             }
@@ -115,7 +121,7 @@ public class UtilityClass {
         String nextQuestion = getCombination(input);
         return input.getResponseBuilder()
                 .withSpeech(responseToUser + nextQuestion)
-                .withSimpleCard(responseToUser,"Good Job!!")
+                .withSimpleCard("","Good Job!!")
                 .withShouldEndSession(false)
                 .build();
     }
